@@ -1,0 +1,68 @@
+name: 💬 Issue / Bug Report
+description: Request help or report an issue.
+title: "<Component>: <Short description of your suggestion>"
+labels: ["🚦 status: awaiting triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        If you have a problem or believe you have found a bug, please complete all the fields so we can easily look into the problem.
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the issue.
+      placeholder: Provide as many details as you can, along with expected behavior. Include versions of all applicable applications.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: Provide the exact steps to reproduce the issue. If we cannot reproduce the issue, the issue will be labeled for more information and will not be addressed until the information is added.
+    validations:
+      required: true
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      description: What component of Cord Engine is this affecting?
+      options:
+        - Commands
+        - Message Components
+        - Scheduled Events
+        - Gateway Events
+        - Configuration
+        - Logging
+        - Secrets management
+        - Localization
+        - Database support
+        - Documentation
+        - Official Plugins
+        - Unofficial Plugins
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: moreinfo
+    attributes:
+      label: Additional info
+      placeholder: Provide any extra information like Discord discussion links, documentation links, etc that you believe would be helpful in finding and resolving the issue.
+    validations:
+  - type: checkboxes
+    id: contributing
+    attributes:
+      label: Checks
+      description: Please certify you have completed the following checks.
+      options:
+        - label: "The format of the title follows <Component>: <Short description of your issue>"
+          required: true
+        - label: I have [searched](https://github.com/cordengine/core/issues?q=is%3Aissue) for this issue and confirm it is not a duplicate.
+          required: true
+        - label: I would like to be assigned to work on this issue if it is confirmed.
+  - type: input
+    id: contact
+    attributes:
+      label: (Optional) Discord Username
+      description: Optionally provide your discord name to help coordinate changes there if necessary.
+    validations:
+      required: false

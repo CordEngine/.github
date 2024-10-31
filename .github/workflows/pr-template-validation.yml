@@ -1,0 +1,75 @@
+name: PR Template Validation
+
+on:
+  workflow_call:
+
+jobs:
+  validate-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR Template from Health File
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ github.repository_owner }}/.github
+          path: health-file
+
+      - name: Validate PR
+        uses: actions/github-script@v6
+        id: check-template
+        with:
+          script: |
+            const fs = require('fs');
+
+            // Read the template file from the org's .github repository
+            const templatePath = 'health-file/.github/PULL_REQUEST_TEMPLATE/pull_request_template.md';
+
+            let template;
+            try {
+              template = fs.readFileSync(templatePath, 'utf8');
+            } catch (error) {
+              core.setFailed(`Could not read template file: ${error.message}`);
+              return;
+            }
+
+            const prBody = context.payload.pull_request.body;
+            if (!prBody) {
+              core.setFailed('PR description is empty');
+              return;
+            }
+
+            // Extract checkbox lines from template
+            const templateCheckboxes = template.match(/- \[ \].*$/gm) || [];
+
+            // Convert template checkboxes to their checked state for comparison
+            const expectedCheckedBoxes = templateCheckboxes.map(line => 
+              line.replace('[ ]', '[x]')
+            );
+
+            // Verify each expected checkbox exists and is checked
+            const missingOrUnchecked = expectedCheckedBoxes.filter(expected => 
+              !prBody.includes(expected)
+            );
+
+            if (missingOrUnchecked.length > 0) {
+              core.setFailed(
+                'The following required checkboxes are either missing or unchecked:\n' +
+                missingOrUnchecked.join('\n')
+              );
+              return;
+            }
+
+            // Extract template sections (headers)
+            const templateSections = template.match(/^##\s.*$/gm) || [];
+
+            // Verify all template sections exist in PR
+            const missingSections = templateSections.filter(section =>
+              !prBody.includes(section)
+            );
+
+            if (missingSections.length > 0) {
+              core.setFailed(
+                'The following required sections are missing:\n' +
+                missingSections.join('\n')
+              );
+              return;
+            }

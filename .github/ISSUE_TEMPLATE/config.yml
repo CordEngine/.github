@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 📑 Documentation
+    url: https://github.com/cordengine/core/wiki
+    about: "Check the documentation before opening a ticket."
+  - name: 💬 Join the Discord Community
+    url: https://discord.gg/T5nhwPMSsJ
+    about: "Chat about Cord Engine and get help with your project."
