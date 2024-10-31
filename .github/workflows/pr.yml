@@ -5,9 +5,9 @@ on:
 
 jobs:
   validate-template:
-    uses: cordengine/.github/.github/workflows/pr-template-validation.yml
+    uses: cordengine/.github/.github/workflows/pr-template-validation.yml@main
   ci:
-    uses: cordengine/.github/.github/workflows/lint.yml
+    uses: cordengine/.github/.github/workflows/lint.yml@main
   lable:
     uses: KeisukeYamashita/attach-labels@v1
     with:
