@@ -6,6 +6,9 @@ on:
 jobs:
   validate-template:
     uses: cordengine/.github/.github/workflows/pr-template-validation.yml@main
+    with:
+      pr_number: ${{ github.event.pull_request.number }}
+      pr_body: ${{ github.event.pull_request.body }}
 
   ci:
     needs: validate-template

@@ -4,8 +4,6 @@
 
 <!-- Please provide a brief description of the change -->
 
-## Summary
-
 <!-- Please do not remove the following line, we use an AI tool called Code Rabbit to help review PRs. It will generate a summary automatically. -->
 
 @coderabbitai summary

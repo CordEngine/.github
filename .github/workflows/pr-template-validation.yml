@@ -2,18 +2,25 @@ name: PR Template Validation
 
 on:
   workflow_call:
+    inputs:
+      pr_number:
+        required: true
+        type: number
+      pr_body:
+        required: true
+        type: string
 
 jobs:
   validate-pr:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout PR Template from Health File
+      - name: Checkout org .github repository
         uses: actions/checkout@v3
         with:
           repository: ${{ github.repository_owner }}/.github
-          path: health-file
+          path: org-github
 
-      - name: Validate PR
+      - name: Check PR Template
         uses: actions/github-script@v6
         id: check-template
         with:
@@ -21,7 +28,7 @@ jobs:
             const fs = require('fs');
 
             // Read the template file from the org's .github repository
-            const templatePath = 'health-file/.github/pull_request_template.md';
+            const templatePath = 'org-github/pull_request_template.md';
 
             let template;
             try {
@@ -31,7 +38,7 @@ jobs:
               return;
             }
 
-            const prBody = context.payload.pull_request.body;
+            const prBody = '${{ inputs.pr_body }}';
             if (!prBody) {
               core.setFailed('PR description is empty');
               return;
