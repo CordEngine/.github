@@ -1,0 +1,14 @@
+name: PR
+
+on:
+  workflow_call:
+
+jobs:
+  validate-template:
+    uses: cordengine/.github/.github/workflows/pr-template-validation.yml
+  ci:
+    uses: cordengine/.github/.github/workflows/lint.yml
+  lable:
+    uses: KeisukeYamashita/attach-labels@v1
+    with:
+      labels: "🐰 status: ready for review"
