@@ -21,7 +21,7 @@ jobs:
             const fs = require('fs');
 
             // Read the template file from the org's .github repository
-            const templatePath = 'health-file/.github/PULL_REQUEST_TEMPLATE/pull_request_template.md';
+            const templatePath = 'health-file/.github/pull_request_template.md';
 
             let template;
             try {
