@@ -1,6 +1,10 @@
 name: "DCO Assistant"
+
 on:
   workflow_call:
+    secrets:
+      WORKFLOW_PAT:
+        required: true
 
 permissions:
   actions: write
