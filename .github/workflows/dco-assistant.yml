@@ -1,5 +1,6 @@
 name: "DCO Assistant"
-on: workflow_run
+on:
+  workflow_run:
 
 permissions:
   actions: write
