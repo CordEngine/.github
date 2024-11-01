@@ -1,0 +1,30 @@
+name: "DCO Assistant"
+on: workflow_run
+
+permissions:
+  actions: write
+  contents: read
+  pull-requests: write
+  statuses: write
+
+jobs:
+  DCOAssistant:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "DCO Assistant"
+        if: (github.event.comment.body == 'recheck' || github.event.comment.body == 'I have read the Developer Certificate of Origin and affirm that by signing and signing off my commits, I am certifying they comply.') || github.event_name == 'pull_request_target'
+        uses: contributor-assistant/github-action@v2.6.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.WORKFLOW_PAT }}
+        with:
+          path-to-signatures: "signatures/version1/dco.json"
+          path-to-document: "https://github.com/CordEngine/.github/blob/main/DCO"
+          branch: "main"
+          allowlist: bot*
+          remote-organization-name: CordEngine
+          remote-repository-name: dco-signatures
+          custom-notsigned-prcomment: "Thank you for your contribution to Cord Engine. We require all new contributors to read and affirm $pathToCLADocument."
+          custom-pr-sign-comment: "I have read the Developer Certificate of Origin and affirm that by signing and signing off my commits, I am certifying they comply."
+          lock-pullrequest-aftermerge: true
+          use-dco-flag: true
