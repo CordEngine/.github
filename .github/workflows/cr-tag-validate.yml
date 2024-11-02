@@ -1,0 +1,44 @@
+name: Validate CodeRabbit Tags
+
+on:
+  workflow_call:
+
+jobs:
+  validate-tags:
+    name: Validate CodeRabbit Tags
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const pr = context.payload.pull_request;
+            let updateNeeded = false;
+            let updateData = {};
+
+            if (pr.title !== '@coderabbitai') {
+              updateData.title = '@coderabbitai';
+              updateNeeded = true;
+            }
+
+            if (!pr.body || !pr.body.includes('@coderabbit summary')) {
+              updateData.body = (pr.body || '') + '\n\n@coderabbit summary';
+              updateNeeded = true;
+            }
+
+            if (updateNeeded) {
+              await github.rest.pulls.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: pr.number,
+                ...updateData
+              });
+            }
+
+            // Add 'ready for review' label
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr.number,
+              labels: ['🐰 status: ready for review']
+            });

@@ -1,0 +1,19 @@
+name: Lint and Test
+
+on:
+  workflow_call:
+
+jobs:
+  lint-and-test:
+    name: Lint and Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.1.4
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - run: bun install --frozen-lockfile
+      - run: bun lint:markdown
+      - run: bun lint:eslint
+      - run: bun lint:tsc
+      - run: bun test
