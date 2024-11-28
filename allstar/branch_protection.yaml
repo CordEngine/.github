@@ -1,0 +1,19 @@
+optConfig:
+  optOutStrategy: true
+  disableRepoOverride: true
+action: issue
+
+enforceDefault: true
+
+requireApproval: true
+approvalCount: 1
+requireCodeOwnerReviews: true
+dismissStale: true
+
+blockForce: true
+requireSignedCommits: true
+
+requireUpToDateBranch: true
+requireStatusChecks:
+  - context: lint
+    appID: 15368

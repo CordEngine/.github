@@ -1,0 +1,31 @@
+{
+  "markdownlint.config": {
+    "MD010": { "code_blocks": false, "spaces_per_tab": 2 },
+    "MD013": false,
+    "MD033": {
+      "allowed_elements": ["div", "img", "picture", "source", "a"]
+    },
+    "MD041": false
+  },
+  "cSpell.words": [
+    "automerge",
+    "datasource",
+    "coderabbitai",
+    "srcset",
+    "valibot",
+    "luxon",
+    "allstar",
+    "CODEOWNERS",
+    "npmjs",
+    "lockb",
+    "fulcio",
+    "sigstore",
+    "rekor",
+    "bestpractices",
+    "ossf",
+    "sarif",
+    "fabulousgk",
+    "fabulousgeek",
+    "securityscorecards"
+  ]
+}

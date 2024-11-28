@@ -1,0 +1,36 @@
+name: PR and Issue Labeler
+description: Automated labeler for Cord Engine projects
+
+runs:
+  using: composite
+  steps:
+    - name: Harden runner
+      uses: step-security/harden-runner@0080882f6c36860b6ba35c610c98ce87d4e2f26f # v2.10.2
+      with:
+        disable-sudo: true
+        egress-policy: block
+        allowed-endpoints: >
+          api.github.com:443
+    - name: Apply PR Labels
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const LABELS = {
+            REVIEW: '🚦 status: awaiting review',
+          };
+
+          const pr = context.payload.pull_request;
+
+          try {
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr.number,
+              labels: Object.values(LABELS)
+            });
+          } catch (error) {
+            core.setFailed(`Failed to add labels to PR #${pr.number}: ${error.message}\nStack: ${error.stack}`);
+            core.debug(`Labels payload was: ${JSON.stringify(Object.values(LABELS), null, 2)}`);
+          }

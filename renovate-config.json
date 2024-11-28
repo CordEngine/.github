@@ -1,0 +1,61 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:best-practices"],
+  "labels": ["🧺 type: chore"],
+  "lockFileMaintenance": {
+    "automerge": true,
+    "addLabels": ["🤖 type: automated"]
+  },
+  "packageRules": [
+    {
+      "matchFileNames": ["**/*"],
+      "semanticCommitType": "🧺 chore"
+    },
+    {
+      "matchDepTypes": ["peerDependencies"],
+      "rangeStrategy": "pin"
+    },
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchCurrentVersion": ">= 1.0.0",
+      "automerge": true,
+      "minimumReleaseAge": "3",
+      "addLabels": ["🤖 type: automated"]
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "minimumReleaseAge": "7",
+      "addLabels": ["🚦 status: awaiting review"],
+      "semanticCommitType": "🌈 improve"
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "datasourceTemplate": "npm",
+      "depNameTemplate": "@biomejs/biome",
+      "fileMatch": ["(^|/)biome.json$"],
+      "matchStrings": [
+        "\"https://biomejs.dev/schemas/(?<currentValue>[^\"]+)/schema.json\""
+      ]
+    },
+    {
+      "customType": "regex",
+      "datasourceTemplate": "npm",
+      "depNameTemplate": "markdownlint-cli2",
+      "fileMatch": ["(^|/).markdownlint.json$"],
+      "matchStrings": [
+        "\"https://raw.githubusercontent.com/DavidAnson/markdownlint-cli2/v(?<currentValue>[^\"]+)/schema/markdownlint-config-schema.json\""
+      ]
+    },
+    {
+      "customType": "regex",
+      "datasourceTemplate": "npm",
+      "depNameTemplate": "cspell",
+      "fileMatch": ["(^|/).cspell.json$", "(^|/)cspell-ext.json$"],
+      "matchStrings": [
+        "\"https://raw.githubusercontent.com/streetsidesoftware/cspell/v(?<currentValue>[^\"]+)/cspell.schema.json\""
+      ]
+    }
+  ]
+}

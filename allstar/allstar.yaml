@@ -1,0 +1,5 @@
+optConfig:
+  optOutStrategy: true
+  disableRepoOverride: true
+issueLabel: "🤖 type: allstar"
+issueRepo: core

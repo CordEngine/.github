@@ -1,0 +1,98 @@
+{
+  "name": "Cord Engine Default Branch Protection",
+  "target": "branch",
+  "enforcement": "active",
+  "conditions": {
+    "ref_name": {
+      "exclude": [],
+      "include": ["~DEFAULT_BRANCH", "refs/heads/main"]
+    }
+  },
+  "rules": [
+    {
+      "type": "deletion"
+    },
+    {
+      "type": "non_fast_forward"
+    },
+    {
+      "type": "required_linear_history"
+    },
+    {
+      "type": "required_signatures"
+    },
+    {
+      "type": "pull_request",
+      "parameters": {
+        "required_approving_review_count": 1,
+        "dismiss_stale_reviews_on_push": true,
+        "require_code_owner_review": true,
+        "require_last_push_approval": true,
+        "required_review_thread_resolution": true,
+        "automatic_copilot_code_review_enabled": false
+      }
+    },
+    {
+      "type": "required_status_checks",
+      "parameters": {
+        "strict_required_status_checks_policy": true,
+        "do_not_enforce_on_create": false,
+        "required_status_checks": [
+          {
+            "context": "DCO",
+            "integration_id": 1861
+          },
+          {
+            "context": "license/cla",
+            "integration_id": null
+          },
+          {
+            "context": "SonarCloud Code Analysis",
+            "integration_id": 12526
+          },
+          {
+            "context": "CodeRabbit",
+            "integration_id": 347564
+          },
+          {
+            "context": "CodeQL",
+            "integration_id": 57789
+          },
+          {
+            "context": "Inspection",
+            "integration_id": 15368
+          }
+        ]
+      }
+    },
+    {
+      "type": "code_scanning",
+      "parameters": {
+        "code_scanning_tools": [
+          {
+            "tool": "CodeQL",
+            "security_alerts_threshold": "high_or_higher",
+            "alerts_threshold": "errors"
+          }
+        ]
+      }
+    }
+  ],
+  "bypass_actors": [
+    {
+      "actor_id": 2740,
+      "actor_type": "Integration",
+      "bypass_mode": "pull_request"
+    },
+    {
+      "actor_id": 11635226,
+      "actor_type": "Team",
+      "bypass_mode": "pull_request"
+    },
+    {
+      "actor_id": 1,
+      "actor_type": "OrganizationAdmin",
+      "bypass_mode": "pull_request"
+    }
+  ]
+}

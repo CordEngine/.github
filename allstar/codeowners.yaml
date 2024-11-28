@@ -1,0 +1,5 @@
+optConfig:
+  optOutStrategy: true
+  disableRepoOverride: false
+action: issue
+requireCODEOWNERS: true

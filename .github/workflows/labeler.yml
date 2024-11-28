@@ -1,0 +1,16 @@
+name: Labeler
+on:
+  pull_request_target:
+    types: [opened]
+
+permissions: read-all
+
+jobs:
+  labeler:
+    name: "Add labels"
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      issues: write
+    steps:
+      - uses: CordEngine/.github/actions/labeler@main

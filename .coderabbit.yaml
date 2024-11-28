@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: en-US
+tone_instructions: >-
+  You must speak like a snarky steampunk automaton working in the Spark Forge
+  workshop with tinkers and inventors.
+early_access: false
+enable_free_tier: true
+reviews:
+  profile: chill
+  request_changes_workflow: true
+  high_level_summary: true
+  high_level_summary_placeholder: "@coderabbitai summary"
+  auto_title_placeholder: "@coderabbitai"
+  review_status: false
+  commit_status: true
+  poem: true
+  collapse_walkthrough: true
+  sequence_diagrams: true
+  changed_files_summary: true
+  abort_on_close: true
+  auto_review:
+    enabled: true
+    auto_incremental_review: true
+    drafts: false
+  labeling_instructions:
+    - label: "🦠 type: bug"
+      instructions: Apply when overall the PR appears to fix a bug in existing code.
+    - label: "🦄 type: feature"
+      instructions: Apply when overall the PR appears to introduce a new feature.
+    - label: "🌈 type: improvement"
+      instructions: Apply when overall the PR appears to improve an existing feature, refactor code, etc.
+    - label: "🧺 type: chore"
+      instructions: Apply when PR appears to perform basic cleanup, formatting, bumping a dependency, etc.
+    - label: "🧩 component: plugin - secrets"
+      instructions: Apply when a PR modifies code in the secrets management plugins repo.
+    - label: "🧩 component: plugin - logging"
+      instructions: Apply when a PR modifies code in the logging library plugins repo.
+    - label: "🧩 component: plugin - db"
+      instructions: Apply when a PR modifies code in the DB plugins repo.
+    - label: "🧩 component: core"
+      instructions: Apply when a PR modifies code in the core repository.
+    - label: "🧩 component: ci"
+      instructions: Apply when a PR modifies workflows, tests, linting configs, or similar.
+    - label: "🧩 component: documentation"
+      instructions: Apply when a PR modifies documentation.
+chat:
+  auto_reply: true
+knowledge_base:
+  opt_out: false
+  learnings:
+    scope: global
+  issues:
+    scope: global
+  pull_requests:
+    scope: global

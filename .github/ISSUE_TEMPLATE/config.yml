@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-issue-config.json
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Join the Discord Community
+    url: https://discord.gg/T5nhwPMSsJ
+    about: We encourage you to raise any issues or requests on Discord first.
+
+  - name: 🗣️ Discussions
+    url: https://github.com/orgs/CordEngine/discussions
+    about: Discussions are a great place to discuss issues and request before raising them as an official report, especially if you are unsure if it is really a bug.
+
+  - name: 📝 Report a bug / Open a feature request
+    url: https://github.com/CordEngine/core/issues/new/choose
+    about: "All bug reports and feature request should be opened in the core repository."

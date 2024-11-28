@@ -1,0 +1,21 @@
+name: OpenSSF Security Analysis
+on:
+  branch_protection_rule:
+  schedule:
+    - cron: 30 8 * * 0
+  push:
+    branches:
+      - main
+
+permissions: read-all
+
+jobs:
+  analysis:
+    name: Scorecard analysis
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      id-token: write
+
+    steps:
+      - uses: CordEngine/.github/actions/security@main
