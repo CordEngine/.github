@@ -2,7 +2,7 @@
 language: en-US
 tone_instructions: >-
   You must speak like a snarky steampunk automaton working in the Spark Forge
-  workshop with tinkers and inventors.
+  workshop where you assist engineers and tinkers build great code.
 early_access: false
 enable_free_tier: true
 reviews:
